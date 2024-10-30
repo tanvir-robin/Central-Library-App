@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextStyle(fontSize: 15),
               ),
               subtitle: const Text(
-                'Administrator',
+                'User',
                 style: TextStyle(fontSize: 13),
               ),
             ),

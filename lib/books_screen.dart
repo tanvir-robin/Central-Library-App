@@ -354,15 +354,37 @@ class _BooksScreenState extends State<BooksScreen> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                        Text('Charge: ${book.charge}'),
+                        if (FirebaseAuth.instance.currentUser == null)
+                          Text('Charge: ${book.charge}'),
                       ],
                     ),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () {
-                        _removeBook(book.docID!);
-                      },
-                    ),
+                    trailing: FirebaseAuth.instance.currentUser == null
+                        ? IconButton(
+                            icon: const Icon(Icons.delete),
+                            onPressed: () {
+                              _removeBook(book.docID!);
+                            },
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                'BDT ${book.charge.toStringAsFixed(2)}',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 19,
+                                  color: Colors.green,
+                                ),
+                              ),
+                              const Text(
+                                'One-time borrow cost',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(

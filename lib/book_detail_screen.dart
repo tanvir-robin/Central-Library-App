@@ -125,43 +125,44 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                   //   },
                   // ),
                   // const SizedBox(height: 15),
-                  widget.book.quantityInStock > 0
-                      ? ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    BorrowBookScreen(book: widget.book),
+                  if (FirebaseAuth.instance.currentUser != null)
+                    widget.book.quantityInStock > 0
+                        ? ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      BorrowBookScreen(book: widget.book),
+                                ),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blueAccent,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 12),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blueAccent,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 12),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              minimumSize: Size(
+                                  MediaQuery.of(context).size.width * 0.8,
+                                  50), // 80% of screen width
                             ),
-                            minimumSize: Size(
-                                MediaQuery.of(context).size.width * 0.8,
-                                50), // 80% of screen width
-                          ),
-                          child: const Text(
-                            'Take the Book',
+                            child: const Text(
+                              'Take the Book',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          )
+                        : const Text(
+                            'This book is currently not available',
                             style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.red,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold),
                           ),
-                        )
-                      : const Text(
-                          'This book is currently not available',
-                          style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        ),
                 ],
               ),
             ),
