@@ -4,8 +4,8 @@ import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 
 class EmailService {
-  final String username = 'tanvirrobin0@gmail.com';
-  final String password = 'fkvawdrjzgnklheb';
+  final String username = 'your_mail@example.com';
+  final String password = 'smtp_password';
 
   // Method to send Book Borrow Confirmation email
   Future<void> sendConfirmation(String receiverEmail, Book book) async {
