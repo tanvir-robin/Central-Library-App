@@ -1,14 +1,32 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:elmouaddibe_examen/books_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
+import 'package:path_provider/path_provider.dart';
 
 class EmailService {
-  final String username = 'your_mail@example.com';
-  final String password = 'smtp_password';
+  final String username = 'tanvirrobin0@gmail.com';
+  final String password = 'fkvawdrjzgnklheb';
+  // final String username = 'your_mail@example.com';
+  // final String password = 'smtp_password';
 
   // Method to send Book Borrow Confirmation email
-  Future<void> sendConfirmation(String receiverEmail, Book book) async {
+
+  Future<File> savePdfToFile(Uint8List pdfData, String bookTitle) async {
+    final directory = await getApplicationDocumentsDirectory();
+    final filePath =
+        '${directory.path}/${bookTitle.replaceAll(' ', '_')}_Certification.pdf';
+    final file = File(filePath);
+
+    await file.writeAsBytes(pdfData);
+    return file;
+  }
+
+  Future<void> sendConfirmation(
+      String receiverEmail, Book book, File pdfFile) async {
     final smtpServer = SmtpServer(
       'smtp.gmail.com',
       port: 465,
@@ -47,6 +65,10 @@ class EmailService {
     ''';
 
     try {
+      // Attach the PDF file using FileAttachment
+      message.attachments.add(FileAttachment(pdfFile)
+        ..fileName = '${book.title.replaceAll(' ', '_')}_Certification.pdf');
+
       final sendReport = await send(message, smtpServer);
       print('Confirmation email sent: $sendReport');
     } on MailerException catch (e) {

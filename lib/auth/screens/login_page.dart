@@ -12,6 +12,8 @@ class LoginPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  LoginPage({super.key});
+
   // Function to validate and log in
   void validateAndLogin(BuildContext context) async {
     if (emailController.text.isEmpty || !emailController.text.contains("@")) {
@@ -72,7 +74,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -90,7 +92,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 controller: passwordController,
                 obscureText: true,
@@ -101,7 +103,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   validateAndLogin(
@@ -113,20 +115,20 @@ class LoginPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: Padding(
+                child: const Padding(
                   padding:
                       EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
                   child: Text("Login"),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextButton(
                 onPressed: () {
                   Get.to(() => SignUpPage());
                 },
-                child: Text("Don't have an account? Sign Up"),
+                child: const Text("Don't have an account? Sign Up"),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   Get.to(() => AdminLoginPage());
@@ -138,7 +140,7 @@ class LoginPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: Padding(
+                child: const Padding(
                   padding:
                       EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
                   child: Text("Admin Login"),

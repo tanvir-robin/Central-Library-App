@@ -243,10 +243,10 @@ class _BooksScreenState extends State<BooksScreen> {
                 );
                 Navigator.of(context).pop();
               },
-              child: const Text('Add'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
               ),
+              child: const Text('Add'),
             ),
           ],
         );
@@ -404,7 +404,7 @@ class _BooksScreenState extends State<BooksScreen> {
 }
 
 class FacultyScreen extends StatelessWidget {
-  FacultyScreen({Key? key}) : super(key: key);
+  FacultyScreen({super.key});
   final List<String> faculties = [
     'All Books', // Added "All Books" as the first option
     'General',
@@ -457,7 +457,8 @@ class FacultyScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BooksScreen(), // No faculty argument
+                    builder: (context) =>
+                        const BooksScreen(), // No faculty argument
                   ),
                 );
               } else {

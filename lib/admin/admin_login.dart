@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
 class AdminLoginPage extends StatefulWidget {
+  const AdminLoginPage({super.key});
+
   @override
   _AdminLoginPageState createState() => _AdminLoginPageState();
 }
@@ -31,7 +33,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Admin Login'),
+        title: const Text('Admin Login'),
         centerTitle: true,
       ),
       body: Center(
@@ -42,16 +44,16 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
+                const Text(
                   'Welcome Admin',
                   style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 20),
-                Text(
+                const SizedBox(height: 20),
+                const Text(
                   'Please login to continue',
                   style: TextStyle(fontSize: 18, color: Colors.grey),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 TextFormField(
                   controller: _emailController,
                   decoration: InputDecoration(
@@ -59,7 +61,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    prefixIcon: Icon(Icons.email),
+                    prefixIcon: const Icon(Icons.email),
                   ),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
@@ -69,7 +71,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextFormField(
                   controller: _passwordController,
                   decoration: InputDecoration(
@@ -77,7 +79,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    prefixIcon: Icon(Icons.lock),
+                    prefixIcon: const Icon(Icons.lock),
                   ),
                   obscureText: true,
                   validator: (value) {
@@ -87,13 +89,21 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState?.validate() ?? false) {
                       _login();
                     }
                   },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.yellow,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 50, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
                   child: Text(
                     'Login',
                     style: TextStyle(
@@ -102,20 +112,13 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.yellow,
-                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
                 ),
                 if (_errorMessage.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
                     child: Text(
                       _errorMessage,
-                      style: TextStyle(color: Colors.red),
+                      style: const TextStyle(color: Colors.red),
                     ),
                   ),
               ],

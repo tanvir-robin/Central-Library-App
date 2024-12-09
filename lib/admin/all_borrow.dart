@@ -8,6 +8,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
 
 class AdminBorrowsScreen extends StatefulWidget {
+  const AdminBorrowsScreen({super.key});
+
   @override
   _AdminBorrowsScreenState createState() => _AdminBorrowsScreenState();
 }
@@ -40,8 +42,7 @@ class _AdminBorrowsScreenState extends State<AdminBorrowsScreen>
   Stream<List<Borrow>> _fetchAllBorrows() {
     return FirebaseFirestore.instance.collection('borrows').snapshots().map(
         (snapshot) => snapshot.docs
-            .map((doc) =>
-                Borrow.fromJson(doc.data() as Map<String, dynamic>, doc.id))
+            .map((doc) => Borrow.fromJson(doc.data(), doc.id))
             .toList());
   }
 
@@ -88,7 +89,7 @@ class _AdminBorrowsScreenState extends State<AdminBorrowsScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('All Borrows'),
+        title: const Text('All Borrows'),
         backgroundColor: Theme.of(context).primaryColor,
       ),
       body: FadeTransition(
@@ -97,11 +98,11 @@ class _AdminBorrowsScreenState extends State<AdminBorrowsScreen>
           stream: _fetchAllBorrows(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
-              return Center(child: Text('Error fetching borrows'));
+              return const Center(child: Text('Error fetching borrows'));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Center(child: Text('No borrows found'));
+              return const Center(child: Text('No borrows found'));
             }
 
             final borrows = snapshot.data!;
@@ -153,7 +154,7 @@ class _AdminBorrowsScreenState extends State<AdminBorrowsScreen>
                 ),
                 title: Text(
                   bookTitle,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Text('Author: $bookAuthor'),
                 trailing: Column(
@@ -161,11 +162,11 @@ class _AdminBorrowsScreenState extends State<AdminBorrowsScreen>
                   children: [
                     Text(
                       'Date: ${DateFormat('dd MMM, yyyy').format(borrow.startDate)}',
-                      style: TextStyle(color: Colors.grey),
+                      style: const TextStyle(color: Colors.grey),
                     ),
                     Text(
                       'Due: ${DateFormat('dd MMM, yyyy').format(borrow.returnDate)}',
-                      style: TextStyle(color: Colors.redAccent),
+                      style: const TextStyle(color: Colors.redAccent),
                     ),
                   ],
                 ),
@@ -207,23 +208,23 @@ class _AdminBorrowsScreenState extends State<AdminBorrowsScreen>
                       ElevatedButton(
                         onPressed: () =>
                             _updateBorrowStatus(borrow, BorrowStatus.borrowed),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green),
                         child: Text(
                           'Mark as Borrowed',
                           style: TextStyle(color: Colors.white),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green),
                       ),
                     if (borrow.status == BorrowStatus.borrowed)
                       ElevatedButton(
                         onPressed: () =>
                             _updateBorrowStatus(borrow, BorrowStatus.returned),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue),
                         child: Text(
                           'Mark as Returned',
                           style: TextStyle(color: Colors.white),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue),
                       ),
                   ],
                 ),

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
@@ -59,7 +58,8 @@ class _chatbotScreenState extends State<chatbotScreen> {
       margin: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment:
+            isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [
           if (!isUser)
             const CircleAvatar(
@@ -143,7 +143,8 @@ class _chatbotScreenState extends State<chatbotScreen> {
                     _controller.clear();
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 16),
                     backgroundColor: Colors.orangeAccent,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),

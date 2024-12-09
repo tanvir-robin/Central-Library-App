@@ -59,9 +59,9 @@ class MemberDetailScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 10),
-                  Text(
+                  const Text(
                     'Registered User',
-                    style: const TextStyle(fontSize: 16, height: 1.5),
+                    style: TextStyle(fontSize: 16, height: 1.5),
                   ),
                 ],
               ),

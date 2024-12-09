@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import 'models/borrow_model.dart';
 
 class MyBorrowsScreen extends StatefulWidget {
+  const MyBorrowsScreen({super.key});
+
   @override
   _MyBorrowsScreenState createState() => _MyBorrowsScreenState();
 }
@@ -42,8 +44,7 @@ class _MyBorrowsScreenState extends State<MyBorrowsScreen>
         .where('borrowerId', isEqualTo: userId)
         .snapshots()
         .map((snapshot) => snapshot.docs
-            .map((doc) =>
-                Borrow.fromJson(doc.data() as Map<String, dynamic>, doc.id))
+            .map((doc) => Borrow.fromJson(doc.data(), doc.id))
             .toList());
   }
 
@@ -51,7 +52,7 @@ class _MyBorrowsScreenState extends State<MyBorrowsScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Borrows'),
+        title: const Text('My Borrows'),
         backgroundColor: Theme.of(context).primaryColor,
       ),
       body: FadeTransition(
@@ -60,11 +61,11 @@ class _MyBorrowsScreenState extends State<MyBorrowsScreen>
           stream: _fetchUserBorrows(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
-              return Center(child: Text('Error fetching borrows'));
+              return const Center(child: Text('Error fetching borrows'));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Center(child: Text('No borrows found'));
+              return const Center(child: Text('No borrows found'));
             }
 
             final borrows = snapshot.data!;
@@ -116,7 +117,7 @@ class _MyBorrowsScreenState extends State<MyBorrowsScreen>
                 ),
                 title: Text(
                   bookTitle,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Text('Author: $bookAuthor'),
                 trailing: Column(
@@ -124,11 +125,11 @@ class _MyBorrowsScreenState extends State<MyBorrowsScreen>
                   children: [
                     Text(
                       'Date: ${DateFormat('dd MMM, yyyy').format(borrow.startDate)}',
-                      style: TextStyle(color: Colors.grey),
+                      style: const TextStyle(color: Colors.grey),
                     ),
                     Text(
                       'Due: ${DateFormat('dd MMM, yyyy').format(borrow.returnDate)}',
-                      style: TextStyle(color: Colors.redAccent),
+                      style: const TextStyle(color: Colors.redAccent),
                     ),
                   ],
                 ),

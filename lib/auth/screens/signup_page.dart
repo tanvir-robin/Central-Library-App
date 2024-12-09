@@ -9,6 +9,8 @@ import 'package:get/route_manager.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
+
   @override
   State<SignUpPage> createState() => _SignUpPageState();
 }

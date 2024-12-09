@@ -98,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       'https://miro.medium.com/v2/resize:fit:600/format:webp/1*PiHoomzwh9Plr9_GA26JcA.png')),
               title: Text(
                 FirebaseAuth.instance.currentUser?.displayName ?? 'Unknown',
-                style: TextStyle(fontSize: 15),
+                style: const TextStyle(fontSize: 15),
               ),
               subtitle: const Text(
                 'User',

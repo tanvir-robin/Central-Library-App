@@ -123,10 +123,10 @@ class _MembersScreenState extends State<MembersScreen> {
                 );
                 Navigator.of(context).pop();
               },
-              child: const Text('Add'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
               ),
+              child: const Text('Add'),
             ),
           ],
         );
@@ -147,7 +147,7 @@ class _MembersScreenState extends State<MembersScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Members'),
-          actions: [
+          actions: const [
             // ElevatedButton.icon(
             //   onPressed: _showAddMemberDialog,
             //   icon: const Icon(Icons.add),
